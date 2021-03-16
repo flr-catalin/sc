@@ -5,7 +5,7 @@ import java.util.List;
 
 import ro.uvt.info.sc.algorithms.caesar.validation.MessageValidator;
 import ro.uvt.info.sc.algorithms.caesar.validation.pojo.Language;
-import ro.uvt.info.sc.algorithms.caesar.validation.utility.StringUtils;
+import ro.uvt.info.sc.algorithms.utility.StringUtils;
 
 /**
  * Caesar cipher implementation. 

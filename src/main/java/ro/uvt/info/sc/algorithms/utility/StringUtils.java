@@ -1,4 +1,4 @@
-package ro.uvt.info.sc.algorithms.caesar.validation.utility;
+package ro.uvt.info.sc.algorithms.utility;
 
 /**
  * Utility class for working with String objects.
@@ -15,11 +15,23 @@ public class StringUtils {
 	 * @return the processed message
 	 */
 	public static char[] processUnencryptedMessage(String unencryptedMessage) {
+		return processUnencryptedMessage(unencryptedMessage, true);
+	}
+	
+	/**
+	 * Processes the unencrypted message. You can choose
+	 * whether the separators are kept.
+	 * 
+	 * @param unencryptedMessage the unencrypted message
+	 * @param keepSeparators whether to keep separators
+	 * @return the processed message
+	 */
+	public static char[] processUnencryptedMessage(String unencryptedMessage, boolean keepSeparators) {
 		char[] messageArray = unencryptedMessage.toLowerCase().toCharArray();
 		
 		StringBuilder processedMessage = new StringBuilder();
 		for (char character : messageArray) {
-			if (isLetter(character) || isSeparator(character)) {
+			if (isLetter(character) || (isSeparator(character) && keepSeparators)) {
 				processedMessage.append(character);
 			}
 		}

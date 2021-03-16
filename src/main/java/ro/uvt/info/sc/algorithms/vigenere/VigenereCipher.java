@@ -9,6 +9,7 @@ import java.util.TreeMap;
 import org.apache.commons.io.IOUtils;
 
 import ro.uvt.info.sc.algorithms.utility.StringUtils;
+import ro.uvt.info.sc.algorithms.vigenere.utility.EnglishFrequencies;
 
 /**
  * Utility methods for deciphering Vigenere chiphers.
@@ -17,8 +18,29 @@ import ro.uvt.info.sc.algorithms.utility.StringUtils;
  */
 public class VigenereCipher {
 
-	public static void chiSquared(String message) {
-		// TODO implementation
+	/**
+	 * Calculates chi squared for the given message.
+	 * 
+	 * @param message the given message
+	 * @return the chi squared
+	 */
+	public static Float chiSquared(String message) {
+		char[] messageArray = StringUtils.processUnencryptedMessage(message, false);
+		int messageLength = messageArray.length;
+		
+		SortedMap<Character, Float> messageFrequencies = getFrequencies(messageArray);
+		SortedMap<Character, Float> englishFrequencies = EnglishFrequencies.getScaledMorseEnglishFrequencies(messageLength);
+		
+		Float sum = new Float(0f);
+		for (Character character : messageFrequencies.keySet()) {
+			Float messageFrequency = messageFrequencies.get(character);
+			Float englishFrequency = englishFrequencies.get(character);
+			
+			double value = Math.pow(messageFrequency - englishFrequency, new Float(2f));
+			sum = sum + (new Float(value) / englishFrequency);
+		}
+		
+		return sum;
 	}
 
 	/**

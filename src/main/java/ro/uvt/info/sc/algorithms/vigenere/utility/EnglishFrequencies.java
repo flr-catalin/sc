@@ -90,9 +90,12 @@ public class EnglishFrequencies {
 	 * @return the frequencies
 	 */
 	public static SortedMap<Character, Float> getScaledMorseEnglishFrequencies(int messageLength) {
+		// TODO remove characters that are not in the message
+		//      and calculate the ratio afterwards
 		Float ratio = new Float(messageLength) / morseEnglishMessageLength;
 		
 		SortedMap<Character, Float> frequencies = new TreeMap<>();
+
 		frequencies.putAll(morseEnglishFrequencies);
 		frequencies.replaceAll((k, v) -> v * ratio);
 		
@@ -107,6 +110,8 @@ public class EnglishFrequencies {
 	 * @return the frequencies
 	 */
 	public static SortedMap<Character, Float> getScaledOxfordEnglishFrequencies(int messageLength) {
+		// TODO remove characters that are not in the message
+		//      and calculate the ratio afterwards
 		Float ratio = new Float(messageLength) / oxfordEnglishMessageLength;
 		
 		SortedMap<Character, Float> frequencies = new TreeMap<>();

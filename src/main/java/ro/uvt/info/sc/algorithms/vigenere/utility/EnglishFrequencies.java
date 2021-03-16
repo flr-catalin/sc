@@ -3,8 +3,6 @@ package ro.uvt.info.sc.algorithms.vigenere.utility;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-import lombok.Getter;
-
 /**
  * Static class that contains frequency maps
  * for the English language.
@@ -14,10 +12,16 @@ import lombok.Getter;
 public class EnglishFrequencies {
 
 	/** The English frequencies by Morse. */
-	@Getter private static SortedMap<Character, Float> morseEnglishFrequencies = new TreeMap<>();
+	private static SortedMap<Character, Float> morseEnglishFrequencies = new TreeMap<>();
 	
 	/** The English frequencies by Oxford. */
-	@Getter private static SortedMap<Character, Float> oxfordEnglishFrequencies = new TreeMap<>();
+	private static SortedMap<Character, Float> oxfordEnglishFrequencies = new TreeMap<>();
+	
+	/** The Morse message length. */
+	private static Float morseEnglishMessageLength;
+	
+	/** The Oxford message length. */
+	private static Float oxfordEnglishMessageLength;
 	
 	static {
 		morseEnglishFrequencies.put(new Character('e'), new Float(12000f));
@@ -73,6 +77,43 @@ public class EnglishFrequencies {
 		oxfordEnglishFrequencies.put(new Character('z'), new Float(1.39f));
 		oxfordEnglishFrequencies.put(new Character('j'), new Float(1.00f));
 		oxfordEnglishFrequencies.put(new Character('q'), new Float(1f));
+		
+		morseEnglishMessageLength = morseEnglishFrequencies.values().stream().reduce(new Float(0f), Float::sum);
+		oxfordEnglishMessageLength = oxfordEnglishFrequencies.values().stream().reduce(new Float(0f), Float::sum);
+	}
+	
+	/**
+	 * Gets the Morse English frequencies scaled
+	 * with the message length.
+	 * 
+	 * @param messageLength the message length
+	 * @return the frequencies
+	 */
+	public static SortedMap<Character, Float> getScaledMorseEnglishFrequencies(int messageLength) {
+		Float ratio = new Float(messageLength) / morseEnglishMessageLength;
+		
+		SortedMap<Character, Float> frequencies = new TreeMap<>();
+		frequencies.putAll(morseEnglishFrequencies);
+		frequencies.replaceAll((k, v) -> v * ratio);
+		
+		return frequencies;
+	}
+	
+	/**
+	 * Gets the Oxford English frequencies scaled
+	 * with the message length.
+	 * 
+	 * @param messageLength the message length
+	 * @return the frequencies
+	 */
+	public static SortedMap<Character, Float> getScaledOxfordEnglishFrequencies(int messageLength) {
+		Float ratio = new Float(messageLength) / oxfordEnglishMessageLength;
+		
+		SortedMap<Character, Float> frequencies = new TreeMap<>();
+		frequencies.putAll(oxfordEnglishFrequencies);
+		frequencies.replaceAll((k, v) -> v * ratio);
+		
+		return frequencies;
 	}
 	
 }

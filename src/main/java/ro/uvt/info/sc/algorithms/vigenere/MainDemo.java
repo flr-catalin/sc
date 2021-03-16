@@ -1,6 +1,6 @@
-package ro.uvt.info.sc.vigenere;
+package ro.uvt.info.sc.algorithms.vigenere;
 
-public class Main {
+public class MainDemo {
 	
 	public static void main(String[] args) {
 		System.out.println(VigenereUtils.indexOfCoincidence("To be, or not to be, that is the question-\r\n" + 

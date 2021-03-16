@@ -1,4 +1,4 @@
-package ro.uvt.info.sc.transposition;
+package ro.uvt.info.sc.algorithms.transposition;
 
 public class TranspositionCypher {
 

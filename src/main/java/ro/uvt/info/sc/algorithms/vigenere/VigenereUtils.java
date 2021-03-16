@@ -1,4 +1,4 @@
-package ro.uvt.info.sc.vigenere;
+package ro.uvt.info.sc.algorithms.vigenere;
 
 import java.io.IOException;
 import java.io.InputStream;

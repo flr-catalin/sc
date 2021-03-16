@@ -1,4 +1,4 @@
-package ro.uvt.info.sc.vigenere;
+package ro.uvt.info.sc.algorithms.vigenere.utility;
 
 import java.util.SortedMap;
 import java.util.TreeMap;

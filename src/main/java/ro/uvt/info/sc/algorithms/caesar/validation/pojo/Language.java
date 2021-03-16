@@ -1,4 +1,4 @@
-package ro.uvt.info.sc.dictionary;
+package ro.uvt.info.sc.algorithms.caesar.validation.pojo;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

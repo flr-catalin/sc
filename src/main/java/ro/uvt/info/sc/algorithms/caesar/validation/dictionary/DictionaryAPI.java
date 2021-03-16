@@ -1,4 +1,4 @@
-package ro.uvt.info.sc.dictionary;
+package ro.uvt.info.sc.algorithms.caesar.validation.dictionary;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -6,6 +6,8 @@ import java.net.URI;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+
+import ro.uvt.info.sc.algorithms.caesar.validation.pojo.Language;
 
 /**
  * This singleton class provides access to the Dictionary API.
@@ -70,8 +72,6 @@ public class DictionaryAPI {
 	
 	/**
 	 * Gets the response from the API.
-	 * 
-	 * @throws IOException could not create connection
 	 */
 	private int getResponseFromApi(String word) throws IOException {
 		int responseCode = getConnection(word).getResponseCode();
@@ -82,8 +82,6 @@ public class DictionaryAPI {
 	/**
 	 * Creates the connection to the Dictionary API.
 	 * <br><code>URI: {baseUri}/{language}/{word}</code>
-	 * 
-	 * @throws IOException could not create connection
 	 */
 	private HttpURLConnection getConnection(String word) throws IOException {
 		StringBuilder specBuilder = new StringBuilder();

@@ -1,10 +1,22 @@
 package ro.uvt.info.sc.algorithms.transposition;
 
-public class TranspositionCypher {
+/**
+ * Transposition cipher implementation.
+ * 
+ * @author Catalin Florea
+ */
+public class TranspositionCipher {
 
-	public static String cypher(String message, String key) {
+	/**
+	 * Ciphers a message with the transpositon cipher.
+	 * 
+	 * @param unencryptedMessage the unencrypted message
+	 * @param key the key
+	 * @return the encrypted message
+	 */
+	public static String cipher(String unencryptedMessage, String key) {
 		char[] keyArray = key.toCharArray();
-		char[] messageArray = message.toLowerCase().replaceAll("\\p{Punct}", "").replaceAll(" ", "").toCharArray();
+		char[] messageArray = unencryptedMessage.toLowerCase().replaceAll("\\p{Punct}", "").replaceAll(" ", "").toCharArray();
 		
 		int columns = keyArray.length;
 		

@@ -5,10 +5,18 @@ import java.util.TreeMap;
 
 import lombok.Getter;
 
+/**
+ * Static class that contains frequency maps
+ * for the English language.
+ * 
+ * @author Catalin Florea
+ */
 public class EnglishFrequencies {
 
+	/** The English frequencies by Morse. */
 	@Getter private static SortedMap<Character, Float> morseEnglishFrequencies = new TreeMap<>();
 	
+	/** The English frequencies by Oxford. */
 	@Getter private static SortedMap<Character, Float> oxfordEnglishFrequencies = new TreeMap<>();
 	
 	static {

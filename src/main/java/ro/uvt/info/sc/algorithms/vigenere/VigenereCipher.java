@@ -32,8 +32,8 @@ public class VigenereCipher {
 		SortedMap<Character, Float> englishFrequencies = EnglishFrequencies.getScaledMorseEnglishFrequencies(messageLength);
 		
 		Float sum = new Float(0f);
-		for (Character character : messageFrequencies.keySet()) {
-			Float messageFrequency = messageFrequencies.get(character);
+		for (Character character : englishFrequencies.keySet()) {
+			Float messageFrequency = messageFrequencies.getOrDefault(character, new Float(0f));
 			Float englishFrequency = englishFrequencies.get(character);
 			
 			double value = Math.pow(messageFrequency - englishFrequency, new Float(2f));

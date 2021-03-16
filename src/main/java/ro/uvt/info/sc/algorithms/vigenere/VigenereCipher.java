@@ -51,7 +51,7 @@ public class VigenereCipher {
 	 * @return the delta
 	 */
 	public static Float indexOfCoincidenceDelta(String message) {
-		String fileName = "sample.txt";
+		String fileName = "ro/uvt/info/sc/algorithms/vigenere/sample.txt";
 		ClassLoader classLoader = VigenereCipher.class.getClassLoader();
 
 		try (InputStream inputStream = classLoader.getResourceAsStream(fileName)) {

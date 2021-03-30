@@ -55,8 +55,20 @@ public class CaesarCipher {
 	 * @return the list of possible decrypted messages
 	 */
 	public static List<String> forceDecipher(String message) {
+		return forceDecipher(message, false);
+	}
+	
+	/**
+	 * Performs a force decipher.
+	 * 
+	 * @param message the encrypted message
+	 * @param keepOriginal whether to keep the original message
+	 * @return the list of possible decrypted messages
+	 */
+	public static List<String> forceDecipher(String message, boolean keepOriginal) {
 		List<String> result = new ArrayList<>();
-		for (int offset = 1; offset < 26; offset++) {
+		int startIndex = keepOriginal ? 0 : 1;
+		for (int offset = startIndex; offset < 26; offset++) {
 			result.add(decipher(message, offset));
 		}
 		

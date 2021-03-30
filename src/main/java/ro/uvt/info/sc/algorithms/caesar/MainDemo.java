@@ -6,7 +6,8 @@ import ro.uvt.info.sc.algorithms.caesar.validation.pojo.Language;
 
 public class MainDemo {
 
-	public static void main(String[] args) {		
+	public static void main(String[] args) {	
+		
 		List<String> decipher = CaesarCipher.dictionaryDecipher(
 				  "uif bjn pg uijt sfqpsu jt up eftdsjcf boe bttftt uif mfjtvsf gbdjmjujft bwbjmbcmf jo bozupxo. "
 				+ "ju jt cbtfe po jogpsnbujpo nbef bwbjmbcmf cz uif bozupxo upvsjtu pggjdf, boe po wjfxt fyqsfttfe "
@@ -18,6 +19,7 @@ public class MainDemo {
 				Language.EnglishUS, .9f, 1);
 		
 		decipher.stream().forEachOrdered(System.out::println);
+		
 	}
 
 }

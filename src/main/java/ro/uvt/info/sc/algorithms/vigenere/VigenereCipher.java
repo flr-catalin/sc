@@ -1,15 +1,11 @@
 package ro.uvt.info.sc.algorithms.vigenere;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-import org.apache.commons.io.IOUtils;
-
 import ro.uvt.info.sc.algorithms.utility.StringUtils;
 import ro.uvt.info.sc.algorithms.vigenere.utility.EnglishFrequencies;
+import ro.uvt.info.sc.algorithms.vigenere.utility.FileUtils;
 
 /**
  * Utility methods for deciphering Vigenere chiphers.
@@ -18,6 +14,30 @@ import ro.uvt.info.sc.algorithms.vigenere.utility.EnglishFrequencies;
  */
 public class VigenereCipher {
 
+	/**
+	 * Deciphers the message.
+	 * 
+	 * @param encryptedMessage the encrypted message
+	 * @param key the key
+	 * @return the unencrypted message
+	 */
+	public static String decipher(String encryptedMessage, final String key) {
+		String unencryptedMessage = "";
+		encryptedMessage = encryptedMessage.toUpperCase();
+		
+		for (int i = 0, j = 0; i < encryptedMessage.length(); i++) {
+			char c = encryptedMessage.charAt(i);
+			if (c < 'A' || c > 'Z') {
+				continue;
+			}
+			
+			unencryptedMessage += (char) ((c - key.charAt(j) + 26) % 26 + 'A');
+			j = ++j % key.length();
+		}
+		
+		return unencryptedMessage;
+	}
+	
 	/**
 	 * Calculates chi squared for the given message.
 	 * 
@@ -29,7 +49,9 @@ public class VigenereCipher {
 		int messageLength = messageArray.length;
 		
 		SortedMap<Character, Float> messageFrequencies = getFrequencies(messageArray);
-		SortedMap<Character, Float> englishFrequencies = EnglishFrequencies.getScaledMorseEnglishFrequencies(messageLength);
+		
+		// set the target frequencies here
+		SortedMap<Character, Float> englishFrequencies = EnglishFrequencies.getScaledOxfordEnglishFrequencies(messageLength);
 		
 		Float sum = new Float(0f);
 		for (Character character : englishFrequencies.keySet()) {
@@ -73,23 +95,19 @@ public class VigenereCipher {
 	 * @return the delta
 	 */
 	public static Float indexOfCoincidenceDelta(String message) {
-		String fileName = "ro/uvt/info/sc/algorithms/vigenere/sample.txt";
-		ClassLoader classLoader = VigenereCipher.class.getClassLoader();
-
-		try (InputStream inputStream = classLoader.getResourceAsStream(fileName)) {
-			String fileMessage = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
-
-			Float sourceIndexOfCoincidence = indexOfCoincidence(message);
-			Float targetIndexOfCoincidence = indexOfCoincidence(fileMessage);
-
-			Float delta = sourceIndexOfCoincidence - targetIndexOfCoincidence;
-
-			return new Float(Math.abs(delta.floatValue()));
-		} catch (IOException e) {
-			e.printStackTrace();
+		String fileName = "sample.txt";
+		
+		String fileMessage = FileUtils.readFromFile(fileName);
+		if (StringUtils.isEmpty(fileMessage)) {
+			return new Float(-1f);
 		}
+		
+		Float sourceIndexOfCoincidence = indexOfCoincidence(message);
+		Float targetIndexOfCoincidence = indexOfCoincidence(fileMessage);
 
-		return new Float(-1f);
+		Float delta = sourceIndexOfCoincidence - targetIndexOfCoincidence;
+
+		return new Float(Math.abs(delta.floatValue()));
 	}
 
 	/**

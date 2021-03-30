@@ -4,7 +4,8 @@ public class MainDemo {
 	
 	public static void main(String[] args) {
 
-		new VigenereDecipher("subiect2.txt", false).execute();
+		VigenereDecipher vigenereDecipher = new VigenereDecipher("subiect2.txt", false);
+		vigenereDecipher.execute();
 		
 	}
 	
